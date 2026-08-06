@@ -9,8 +9,8 @@
   "plugins": [
     {
       "name": "svvi-thesis",
-      "description": "Thesis Prompt 1/2 skills, job queue helpers, and the hosted SVVI corpus MCP",
-      "version": "1.2.0",
+      "description": "Thesis Prompt 1/2 skills, local corpus sync, job helpers, hosted SVVI MCP",
+      "version": "1.3.0",
       "author": {
         "name": "SVVI",
         "url": "https://github.com/TeddyJubu/svvi-claude-plugins"
@@ -24,7 +24,8 @@
         "research",
         "venture-capital",
         "mcp",
-        "scheduler"
+        "scheduler",
+        "corpus-sync"
       ]
     }
   ]

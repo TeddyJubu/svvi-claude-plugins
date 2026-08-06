@@ -29,15 +29,22 @@ You should see a document count.
 
 ---
 
-## Optional: thesis skills (plugin zip)
+## Local corpus mirror (plugin zip)
 
-Only if you also want `/svvi-thesis` skills and prompts:
+Install the plugin if you want **local `.md` files** (offline + open/cite) that stay in sync with the server:
 
 1. Download:  
    **https://github.com/TeddyJubu/svvi-claude-plugins/releases/latest/download/svvi-thesis.zip**
 2. **Customize** → **Plugins** → **Upload plugin** → choose the zip.
-3. Paste the MCP token if asked (connector above already covers tools).
-4. New session for skills to load.
+3. Paste the **same MCP token** when prompted (required for sync).
+4. Start a **new** session — SessionStart runs `sync-corpus` (downloads `corpus.tar.gz` into the plugin `corpus/` folder, at most once per hour unless forced).
+5. Manual refresh: ask Claude to run **sync-corpus**, or:
+
+```bash
+SVVI_SYNC_FORCE=1 bash "${CLAUDE_PLUGIN_ROOT}/scripts/sync-corpus.sh"
+```
+
+**Retention:** local `corpus/*.md` with filesystem **access time older than 90 days** are deleted on each sync so unused docs don’t pile up. Opening/reading a file refreshes atime. If your disk is mounted `noatime`, run `touch -a` on files you cite, or they may prune early.
 
 Marketplace URL (public): `https://github.com/TeddyJubu/svvi-claude-plugins`  
 Do **not** use `TeddyJubu/SVVI-fork` (private).
@@ -78,5 +85,6 @@ Or install the plugin:
 | Claude says “no SVVI MCP” / only Notion, Attio, … | **Connectors** step missing — add the custom connector URL above, then **new** chat |
 | Connector fails to connect / `401` | Token wrong or missing from the URL (`?token=…`) |
 | Token in URL feels sketchy | Prefer Claude Code / plugin with `Authorization: Bearer …` header |
+| Local `corpus/` empty | Plugin + token required; force sync; check `svvi-sync:` lines on SessionStart |
 | Skills missing | Upload the optional zip; start a new session |
 | Private-repo marketplace errors | Use Connectors URL or the public zip / `svvi-claude-plugins` |

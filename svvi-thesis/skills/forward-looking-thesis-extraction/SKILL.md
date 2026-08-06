@@ -34,6 +34,8 @@ Resolve the **project root** as the user's current working project (directory th
 
 If the user passes a different corpus path, use that instead of `output/`.
 
+If `${CLAUDE_PLUGIN_ROOT}/corpus/` exists and contains `.md` files (from `sync-corpus`), prefer that path over `output/` unless the user overrode the corpus directory.
+
 ## Source-type mapping
 
 Corpus is flat Markdown; type comes from YAML frontmatter `platform:` when present:
