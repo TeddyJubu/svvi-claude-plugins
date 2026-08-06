@@ -9,8 +9,8 @@
   "plugins": [
     {
       "name": "svvi-thesis",
-      "description": "Thesis Prompt 1/2 skills, local corpus sync, job helpers, hosted SVVI MCP",
-      "version": "1.3.1",
+      "description": "Thesis skills, corpus sync, and VPS-synced ops dashboard artifact",
+      "version": "1.4.0",
       "author": {
         "name": "SVVI",
         "url": "https://github.com/TeddyJubu/svvi-claude-plugins"

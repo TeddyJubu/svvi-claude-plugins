@@ -1,5 +1,5 @@
 {
-  "description": "Sync SVVI corpus + notice pending Prompt 1/2 jobs",
+  "description": "Sync SVVI corpus, refresh ops dashboard, notice pending jobs",
   "hooks": {
     "SessionStart": [
       {
@@ -9,6 +9,11 @@
             "type": "command",
             "command": "bash \"${CLAUDE_PLUGIN_ROOT}/scripts/sync-corpus.sh\"",
             "timeout": 120
+          },
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/scripts/build-dashboard.sh\"",
+            "timeout": 60
           },
           {
             "type": "command",
