@@ -422,9 +422,31 @@
       : "no scheduled jobs";
 
     const recent = DATA.recent || [];
-    document.getElementById("recent-body").innerHTML = recent.slice(0, 12).map((row) => (
-      "<tr><td class='name'>" + row.name + "</td><td>" + row.day + "</td><td class='num'>" + fmtBytes(row.bytes) + "</td></tr>"
-    )).join("") || "<tr><td colspan='3'>No documents yet</td></tr>";
+    const tbody = document.getElementById("recent-body");
+    tbody.replaceChildren();
+    const rows = recent.slice(0, 12);
+    if (!rows.length) {
+      const tr = document.createElement("tr");
+      const td = document.createElement("td");
+      td.colSpan = 3;
+      td.textContent = "No documents yet";
+      tr.appendChild(td);
+      tbody.appendChild(tr);
+    } else {
+      rows.forEach((row) => {
+        const tr = document.createElement("tr");
+        const tdName = document.createElement("td");
+        tdName.className = "name";
+        tdName.textContent = String(row.name || "");
+        const tdDay = document.createElement("td");
+        tdDay.textContent = String(row.day || "");
+        const tdSize = document.createElement("td");
+        tdSize.className = "num";
+        tdSize.textContent = fmtBytes(row.bytes || 0);
+        tr.append(tdName, tdDay, tdSize);
+        tbody.appendChild(tr);
+      });
+    }
 
     Chart.defaults.font.family = "'SF Pro Text', Inter, system-ui, sans-serif";
     Chart.defaults.color = "#7a7a7a";

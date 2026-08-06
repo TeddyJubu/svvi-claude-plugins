@@ -7,7 +7,6 @@ import json
 import os
 import sys
 import urllib.error
-import urllib.parse
 import urllib.request
 from pathlib import Path
 
@@ -23,6 +22,7 @@ def _token(root: Path) -> str:
 
 
 def _fetch(url: str, token: str) -> dict:
+    """Auth via Authorization header only — never put the token in the URL."""
     req = urllib.request.Request(
         url,
         headers={"Authorization": f"Bearer {token}", "Accept": "application/json"},
@@ -30,11 +30,21 @@ def _fetch(url: str, token: str) -> dict:
     try:
         with urllib.request.urlopen(req, timeout=60) as resp:
             return json.loads(resp.read().decode("utf-8"))
-    except urllib.error.HTTPError:
-        sep = "&" if "?" in url else "?"
-        qurl = f"{url}{sep}token={urllib.parse.quote(token)}"
-        with urllib.request.urlopen(qurl, timeout=60) as resp:
-            return json.loads(resp.read().decode("utf-8"))
+    except urllib.error.HTTPError as exc:
+        raise RuntimeError(f"dashboard HTTP {exc.code}") from None
+    except urllib.error.URLError as exc:
+        reason = getattr(exc, "reason", None)
+        raise RuntimeError(f"dashboard network error: {type(reason).__name__ if reason else 'URLError'}") from None
+
+
+def _html_safe_json(data: dict) -> str:
+    """Embed JSON in a <script> tag without allowing </script> breakout."""
+    return (
+        json.dumps(data, ensure_ascii=False, separators=(",", ":"))
+        .replace("<", "\\u003c")
+        .replace(">", "\\u003e")
+        .replace("&", "\\u0026")
+    )
 
 
 def main() -> int:
@@ -49,8 +59,7 @@ def main() -> int:
     data = _fetch(url, token)
     template_path = root / "dashboard" / "template.html"
     template = template_path.read_text(encoding="utf-8")
-    payload = json.dumps(data, ensure_ascii=False, separators=(",", ":"))
-    html = template.replace("__SVVI_DATA_JSON__", payload)
+    html = template.replace("__SVVI_DATA_JSON__", _html_safe_json(data))
 
     out_dir = root / "dashboard"
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -90,5 +99,6 @@ if __name__ == "__main__":
     try:
         raise SystemExit(main())
     except Exception as exc:  # noqa: BLE001
-        print(f"svvi-dashboard: {exc}", file=sys.stderr)
+        # Never print exception strings that might contain URLs with secrets.
+        print(f"svvi-dashboard: {type(exc).__name__}: {exc}", file=sys.stderr)
         raise SystemExit(1)
