@@ -1,51 +1,44 @@
-# SVVI Claude plugin setup
+# SVVI setup (Claude Code / Cowork)
 
-Install in Claude Code or Cowork (works in cloud sandboxes — this repo is **public**):
+## 1. Install the plugin
+
+In Claude Code or Cowork, run:
 
 ```text
 /plugin marketplace add TeddyJubu/svvi-claude-plugins
 /plugin install svvi-thesis@svvi-plugins
 ```
 
-When prompted for **SVVI MCP token**, paste the shared team bearer token (ask an SVVI admin). Never commit the token.
+## 2. Paste the token
 
-Then:
+When prompted for **SVVI MCP token**, paste the team token.
 
-1. Open `/mcp` and confirm `svvi` is connected
-2. Ask: “Call `corpus_stats` on the SVVI MCP”
-3. Health check (no auth): https://srv1825737.hstgr.cloud/mcp-health
-4. Viewer: https://srv1825737.hstgr.cloud/
+Get the token from an SVVI admin (or from the server: `SVVI_MCP_TOKEN` in `/opt/SVVI-fork/.env`). Never commit it.
 
-## CLI
+## 3. Check it works
 
-```bash
-claude plugin marketplace add TeddyJubu/svvi-claude-plugins
-claude plugin install svvi-thesis@svvi-plugins
+Ask Claude:
+
+```text
+Call corpus_stats on the SVVI MCP
 ```
 
-## What you get
+You should see a document count. Optional links:
 
-| Piece | Detail |
+- Health: https://srv1825737.hstgr.cloud/mcp-health
+- Viewer: https://srv1825737.hstgr.cloud/
+
+## Commands after install
+
+| Goal | Command |
 | --- | --- |
-| Skills / slash commands | Prompt 1, Prompt 2, pipeline, process-pending-jobs |
-| Hosted MCP | `https://srv1825737.hstgr.cloud/mcp` |
-| Auth | Bearer token prompted at enable (`userConfig`) |
+| Prompt 1 | `/svvi-thesis:prompt-1` |
+| Prompt 2 | `/svvi-thesis:prompt-2` |
+| Full pipeline | `/svvi-thesis:run-thesis-pipeline` |
+| Pending jobs | `/svvi-thesis:process-pending-jobs` |
 
-## Manual MCP fallback
+## If install fails
 
-```bash
-export SVVI_MCP_TOKEN='paste-token-here'
-claude mcp add --transport http \
-  --header "Authorization: Bearer ${SVVI_MCP_TOKEN}" \
-  svvi https://srv1825737.hstgr.cloud/mcp
-```
-
-## Troubleshooting
-
-| Symptom | Fix |
-| --- | --- |
-| HTTPS auth / clone failed | Use this repo (`TeddyJubu/svvi-claude-plugins`), not the private `SVVI-fork` |
-| 401 on MCP | Wrong/expired token — ask admin |
-| Plugin failed to load | Update Claude Code; reinstall plugin |
-
-Source of truth for the fetch app remains private: `TeddyJubu/SVVI-fork`. This repo is the install surface only.
+- Use **`TeddyJubu/svvi-claude-plugins`** (public). Do **not** use private `SVVI-fork`.
+- Restart the Claude session after install so skills load.
+- `401` on MCP → wrong token; ask admin for a fresh one.
