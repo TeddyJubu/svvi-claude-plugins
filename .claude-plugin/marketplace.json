@@ -10,7 +10,7 @@
     {
       "name": "svvi-thesis",
       "description": "Thesis skills, corpus sync, and VPS-synced ops dashboard artifact",
-      "version": "1.4.1",
+      "version": "1.4.2",
       "author": {
         "name": "SVVI",
         "url": "https://github.com/TeddyJubu/svvi-claude-plugins"

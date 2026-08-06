@@ -7,12 +7,25 @@ description: >-
 argument-hint: "[platform=...] [batch=N] [query=...] [since=YYYY-MM-DD] [until=YYYY-MM-DD] [limit=N]"
 allowed-tools: [Read, Write, Edit, Glob, Grep, Bash]
 compatibility: Requires synced local corpus/ and/or SVVI MCP. Prefer VPS-backed tools when connected.
-version: 1.0.0
+version: 1.1.0
 ---
 
 # /report — selected corpus research briefing
 
-Produce a **research briefing** (not the full Prompt 1 pipeline) from a **filtered** corpus selection. Present the final briefing as a **Claude artifact**.
+Produce a **research briefing** from a **filtered** corpus selection and present it as an **HTML Claude artifact** styled with the Apple design system.
+
+## Design system (required)
+
+1. Read `${CLAUDE_PLUGIN_ROOT}/references/DESIGN-apple.md`.
+2. Start from `${CLAUDE_PLUGIN_ROOT}/dashboard/report-template.html` — **keep its CSS/tokens unchanged**.
+3. Fill only the `__REPORT_*__` placeholders (or equivalent content slots). Do **not** introduce a second accent color, decorative gradients, card shadows, or non-system fonts.
+
+Non-negotiables from the design system:
+
+- Action Blue `#0066cc` is the only interactive color (use `#2997ff` only on dark tiles).
+- Surfaces: white / parchment `#f5f5f7` / near-black `#272729`, alternating as section tiles.
+- SF Pro / system-ui / Inter substitute; body 17px / 400 / 1.47; display headlines weight 600.
+- No UI chrome shadows; utility source cards use 18px radius + hairline only.
 
 ## Arguments
 
@@ -31,7 +44,7 @@ If `$ARGUMENTS` is empty, ask the user which filters to apply (do not dump the w
 ## Selection (VPS is source of truth)
 
 1. If local `${CLAUDE_PLUGIN_ROOT}/corpus` looks empty/stale, sync first (`sync-corpus` skill).
-2. Build the selection (prefer **MCP** when connected so filters hit the live VPS corpus):
+2. Build the selection (prefer **MCP** when connected):
 
 **Preferred — MCP**
 
@@ -51,54 +64,33 @@ python3 "${CLAUDE_PLUGIN_ROOT}/scripts/select-corpus.py" \
   --excerpt-chars 1500
 ```
 
-Omit empty flags. Use the JSON `files` list as the working set.
+Omit empty flags. If `count` is 0, stop and tell the user to widen filters.
 
-If `count` is 0, stop and tell the user to widen filters.
+## Fill the HTML template
 
-## Write the briefing
+Copy `dashboard/report-template.html` → `reports/briefing-YYYYMMDD-HHMM.html` and replace:
 
-Create `reports/` if needed. Write:
-
-`reports/briefing-YYYYMMDD-HHMM.md`
-
-Use this structure:
-
-```markdown
-# SVVI briefing — <short theme>
-
-- Generated: <ISO timestamp>
-- Source: VPS corpus (plugin mirror / MCP)
-- Filters: platform=…; batch=…; query=…; since=…; until=…; limit=…
-- Documents: N
-
-## Executive summary
-3–6 sentences. Only what the selected docs support.
-
-## Key takeaways
-- …
-- …
-
-## Source notes
-### 1. <title>
-- File: `<filename>`
-- Platform / date / url (if known)
-- Relevance: one line
-- Notable passages: 1–3 short quotes or tight paraphrases marked *(transcribed)* when from audio
-
-(repeat per doc)
-
-## Gaps & caveats
-What the selection does **not** cover; filter bias.
-```
+| Placeholder | Content |
+| --- | --- |
+| `__REPORT_TITLE__` | Short theme title (also used in `<title>`) |
+| `__REPORT_LEDE__` | One sentence under the hero |
+| `__REPORT_FILTERS__` | Compact filter + doc-count line for the sub-nav |
+| `__REPORT_SUMMARY__` | 3–6 sentence executive summary (plain text/HTML paragraphs) |
+| `__REPORT_TAKEAWAYS__` | `<li>…</li>` items only |
+| `__REPORT_SOURCES__` | Repeated `.source` blocks (see template) with title, meta, quotes |
+| `__REPORT_GAPS__` | Short caveats paragraph(s) |
+| `__REPORT_FOOTER__` | Generated timestamp + “VPS corpus · N sources” |
 
 **Hard rules**
 
 - Only use selected documents. Do not invent quotes or sources outside the set.
-- Prefer verbatim short quotes; truncate with ellipsis.
-- Keep the briefing scannable (aim ~1–3 pages equivalent).
+- Prefer short verbatim quotes inside `<blockquote>`; mark transcribed speech *(transcribed)*.
+- Keep the briefing scannable.
+
+Also write a plain-text twin at `reports/briefing-YYYYMMDD-HHMM.md` if useful for editing — but **the artifact presented to the user must be the HTML**.
 
 ## Deliver as artifact
 
-1. Save the markdown file.
-2. **Present the briefing as a Claude artifact** in this chat (do not only paste a file path).
-3. Reply with: filter summary, document count, and the `reports/…` path.
+1. Save the HTML file under `reports/`.
+2. **Present the HTML as a Claude artifact** in this chat (do not only link the path).
+3. Reply with: filter summary, document count, and the `reports/….html` path.

@@ -1,6 +1,6 @@
 {
   "name": "svvi-thesis",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "SVVI thesis workflow, VPS-synced corpus, and ops dashboard artifact for Cowork.",
   "author": {
     "name": "SVVI",

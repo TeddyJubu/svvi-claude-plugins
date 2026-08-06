@@ -11,7 +11,9 @@ version: 1.0.0
 # SVVI ops dashboard (Claude artifact)
 
 VPS is the source of truth. The dashboard HTML is generated from
-`https://srv1825737.hstgr.cloud/corpus/dashboard.json`.
+`https://srv1825737.hstgr.cloud/corpus/dashboard.json` using the Apple design
+system in `${CLAUDE_PLUGIN_ROOT}/references/DESIGN-apple.md` (tokens baked into
+`${CLAUDE_PLUGIN_ROOT}/dashboard/template.html`).
 
 ## Steps
 
@@ -25,5 +27,6 @@ SVVI_DASHBOARD_FORCE=1 bash "${CLAUDE_PLUGIN_ROOT}/scripts/build-dashboard.sh"
 3. Read `${CLAUDE_PLUGIN_ROOT}/dashboard/svvi-ops.html` (or `svvi-ops-dashboard.html` in the working directory).
 4. **Present it immediately as an interactive HTML artifact** in this Cowork chat (do not only link the path).
 5. Briefly state totals (documents / top platform / whether schedules exist) from the embedded data.
+6. Do **not** restyle the dashboard ad hoc — change `dashboard/template.html` / `DESIGN-apple.md` instead.
 
 If the SessionStart hook already printed `SVVI_DASHBOARD_ARTIFACT=...`, skip rebuild unless the user asks to refresh or a fetch just completed.

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>__REPORT_TITLE__ — SVVI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    /* tokens from references/DESIGN-apple.md — do not invent a second accent */
+    :root {
+      --color-primary: #0066cc;
+      --color-primary-on-dark: #2997ff;
+      --color-ink: #1d1d1f;
+      --color-body-muted: #cccccc;
+      --color-ink-muted-80: #333333;
+      --color-ink-muted-48: #7a7a7a;
+      --color-hairline: #e0e0e0;
+      --color-canvas: #ffffff;
+      --color-canvas-parchment: #f5f5f7;
+      --color-surface-tile-1: #272729;
+      --color-surface-black: #000000;
+      --color-on-dark: #ffffff;
+      --font-display: "SF Pro Display", "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-text: "SF Pro Text", "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      --radius-lg: 18px;
+      --radius-pill: 9999px;
+      --space-lg: 24px;
+      --space-section: 80px;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-text);
+      font-size: 17px;
+      font-weight: 400;
+      line-height: 1.47;
+      letter-spacing: -0.374px;
+      color: var(--color-ink);
+      background: var(--color-canvas);
+    }
+    .global-nav {
+      background: var(--color-surface-black);
+      color: var(--color-on-dark);
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 22px;
+      font-size: 12px;
+      letter-spacing: -0.12px;
+    }
+    .global-nav .brand-mark {
+      font-family: var(--font-display);
+      font-weight: 600;
+    }
+    .sub-nav {
+      background: rgba(245, 245, 247, 0.8);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      min-height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 10px 22px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    }
+    .sub-nav .cat {
+      font-family: var(--font-display);
+      font-size: 21px;
+      font-weight: 600;
+      letter-spacing: 0.231px;
+      line-height: 1.19;
+    }
+    .sub-nav .filters {
+      font-size: 12px;
+      color: var(--color-ink-muted-48);
+      letter-spacing: -0.12px;
+      text-align: right;
+      max-width: 55%;
+    }
+    .tile { padding: var(--space-section) 22px; }
+    .tile-light { background: var(--color-canvas); }
+    .tile-parchment { background: var(--color-canvas-parchment); }
+    .tile-dark { background: var(--color-surface-tile-1); color: var(--color-on-dark); }
+    .inner { max-width: 780px; margin: 0 auto; }
+    h1.hero {
+      font-family: var(--font-display);
+      font-size: clamp(34px, 5vw, 56px);
+      font-weight: 600;
+      line-height: 1.07;
+      letter-spacing: -0.28px;
+      margin: 0 0 16px;
+    }
+    .lead {
+      font-family: var(--font-display);
+      font-size: clamp(21px, 3vw, 28px);
+      font-weight: 400;
+      line-height: 1.14;
+      letter-spacing: 0.196px;
+      margin: 0;
+      max-width: 34em;
+    }
+    .tile-dark .lead { color: var(--color-body-muted); }
+    h2 {
+      font-family: var(--font-display);
+      font-size: 21px;
+      font-weight: 600;
+      line-height: 1.19;
+      letter-spacing: 0.231px;
+      margin: 0 0 20px;
+    }
+    p { margin: 0 0 1em; }
+    ul { margin: 0 0 0; padding-left: 1.15em; }
+    li { margin: 0 0 0.55em; }
+    .takeaways li::marker { color: var(--color-primary); }
+    .source {
+      background: var(--color-canvas);
+      border: 1px solid var(--color-hairline);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      margin: 0 0 16px;
+    }
+    .tile-parchment .source { background: var(--color-canvas); }
+    .source h3 {
+      font-family: var(--font-text);
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: -0.374px;
+      line-height: 1.24;
+      margin: 0 0 8px;
+    }
+    .source .meta {
+      font-size: 14px;
+      letter-spacing: -0.224px;
+      color: var(--color-ink-muted-48);
+      margin-bottom: 12px;
+    }
+    .source .meta a { color: var(--color-primary); text-decoration: none; }
+    .source blockquote {
+      margin: 12px 0 0;
+      padding: 0 0 0 14px;
+      border-left: 2px solid var(--color-primary);
+      color: var(--color-ink-muted-80);
+      font-size: 17px;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      background: var(--color-primary);
+      color: #fff;
+      border-radius: var(--radius-pill);
+      padding: 11px 22px;
+      font-size: 17px;
+      letter-spacing: -0.374px;
+      text-decoration: none;
+      margin-top: 28px;
+    }
+    .pill:active { transform: scale(0.95); }
+    footer.site-footer {
+      background: var(--color-canvas-parchment);
+      color: var(--color-ink-muted-48);
+      padding: 48px 22px 64px;
+      font-size: 12px;
+      letter-spacing: -0.12px;
+    }
+    footer.site-footer .inner {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+    @media (max-width: 640px) {
+      .tile { padding: 48px 18px; }
+      .sub-nav { flex-direction: column; align-items: flex-start; height: auto; }
+      .sub-nav .filters { max-width: 100%; text-align: left; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="global-nav" aria-label="Global">
+    <span class="brand-mark">SVVI</span>
+    <span>Briefing</span>
+  </nav>
+  <div class="sub-nav">
+    <div class="cat">Report</div>
+    <div class="filters">__REPORT_FILTERS__</div>
+  </div>
+
+  <section class="tile tile-light">
+    <div class="inner">
+      <h1 class="hero">__REPORT_TITLE__</h1>
+      <p class="lead">__REPORT_LEDE__</p>
+      <a class="pill" href="#takeaways">Read takeaways</a>
+    </div>
+  </section>
+
+  <section class="tile tile-dark">
+    <div class="inner">
+      <h2>Executive summary</h2>
+      <div class="lead" style="font-size:24px;font-weight:300;line-height:1.5;letter-spacing:0;">__REPORT_SUMMARY__</div>
+    </div>
+  </section>
+
+  <section class="tile tile-parchment" id="takeaways">
+    <div class="inner">
+      <h2>Key takeaways</h2>
+      <ul class="takeaways">
+__REPORT_TAKEAWAYS__
+      </ul>
+    </div>
+  </section>
+
+  <section class="tile tile-light">
+    <div class="inner">
+      <h2>Source notes</h2>
+__REPORT_SOURCES__
+    </div>
+  </section>
+
+  <section class="tile tile-parchment">
+    <div class="inner">
+      <h2>Gaps &amp; caveats</h2>
+      <div>__REPORT_GAPS__</div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="inner">
+      __REPORT_FOOTER__
+    </div>
+  </footer>
+</body>
+</html>
