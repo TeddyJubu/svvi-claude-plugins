@@ -17,8 +17,9 @@ Produce a **research briefing** from a **filtered** corpus selection and present
 ## Design system (required)
 
 1. Read `${CLAUDE_PLUGIN_ROOT}/references/DESIGN-apple.md`.
-2. Start from `${CLAUDE_PLUGIN_ROOT}/dashboard/report-template.html` — **keep its CSS/tokens unchanged**.
-3. Fill only the `__REPORT_*__` placeholders (or equivalent content slots). Do **not** introduce a second accent color, decorative gradients, card shadows, or non-system fonts.
+2. Follow `${CLAUDE_PLUGIN_ROOT}/skills/design-system/SKILL.md` for **all** visual output.
+3. Start from `${CLAUDE_PLUGIN_ROOT}/dashboard/report-template.html` — **keep its CSS/tokens unchanged**.
+4. Fill only the `__REPORT_*__` placeholders (or equivalent content slots). Do **not** introduce a second accent color, decorative gradients, card shadows, or non-system fonts.
 
 Non-negotiables from the design system:
 

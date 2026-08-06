@@ -45,7 +45,7 @@ SVVI_SYNC_FORCE=1 bash "${CLAUDE_PLUGIN_ROOT}/scripts/sync-corpus.sh"
 SVVI_DASHBOARD_FORCE=1 bash "${CLAUDE_PLUGIN_ROOT}/scripts/build-dashboard.sh"
 ```
 
-Dashboard and `/report` HTML artifacts follow `plugins/svvi-thesis/references/DESIGN-apple.md` (Action Blue, parchment/tile rhythm, SF Pro).
+Dashboard and `/report` HTML artifacts follow `plugins/svvi-thesis/references/DESIGN-apple.md` (Action Blue, parchment/tile rhythm, SF Pro). **Presentations and every other visual artifact use the same system** (`/svvi-thesis:present` + `design-system` skill).
 
 Or ask: `Show the SVVI dashboard` (`/svvi-thesis:dashboard`).
 

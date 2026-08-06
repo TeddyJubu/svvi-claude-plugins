@@ -20,6 +20,7 @@ Act as a rigorous investment research analyst at an AI-focused venture capital f
 - Only write under the deliverable folder `prompt 1/` (overwriting the deliverable is expected).
 - Only extract what is explicitly stated. Do not infer, extrapolate, or fabricate.
 - Process **every** `.md` file in the corpus. Never silently skip a file.
+- Any HTML presentation of thesis statements must follow `${CLAUDE_PLUGIN_ROOT}/skills/design-system/SKILL.md` (Apple design system).
 
 ## Working-project layout
 

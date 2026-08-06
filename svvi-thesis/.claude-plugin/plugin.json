@@ -1,7 +1,7 @@
 {
   "name": "svvi-thesis",
-  "version": "1.4.2",
-  "description": "SVVI thesis workflow, VPS-synced corpus, and ops dashboard artifact for Cowork.",
+  "version": "1.4.3",
+  "description": "SVVI thesis workflow with Apple design system for every visual artifact.",
   "author": {
     "name": "SVVI",
     "url": "https://github.com/TeddyJubu/SVVI-fork"
@@ -20,7 +20,9 @@
     "cowork",
     "claude-code",
     "corpus-sync",
-    "dashboard"
+    "dashboard",
+    "presentation",
+    "design-system"
   ],
   "userConfig": {
     "mcp_token": {

@@ -95,16 +95,20 @@ spacing:
 
 # SVVI use of Apple design
 
-Canonical design system for **ops dashboard** and **research report** HTML artifacts in this plugin.
+**Canonical design system for everything visual in this plugin:** ops dashboard, research reports, presentations / slide decks, thesis deck pages, and any other HTML Claude artifact.
+
+Agents must also follow `${CLAUDE_PLUGIN_ROOT}/skills/design-system/SKILL.md`.
 
 ## Non-negotiables
 
-- Single accent: Action Blue `#0066cc` for all interactive affordances.
+- Single accent: Action Blue `#0066cc` for all interactive affordances. Sky `#2997ff` only on dark tiles.
 - Surfaces: white `#ffffff`, parchment `#f5f5f7`, near-black tile `#272729` — alternate for section rhythm. No decorative gradients.
 - No shadows on UI chrome (cards/buttons/text). Flat + hairline only.
 - Type: `SF Pro Display` / `SF Pro Text` with `system-ui, -apple-system, BlinkMacSystemFont` fallback; off-Apple platforms may load Inter as substitute with tightened tracking.
 - Body at 17px / 400 / 1.47 / -0.374px. Display headlines weight 600, never 700. No weight 500.
-- Full-bleed section tiles use `rounded.none`. Utility panels use `rounded.lg` (18px) + hairline `#e0e0e0`.
-- Pills use `rounded.pill` for primary actions/links styled as CTAs.
+- Full-bleed section/slide tiles use `rounded.none`. Utility panels use `rounded.lg` (18px) + hairline `#e0e0e0`.
+- Pills use `rounded.pill` for primary actions.
 
-See plugin HTML templates under `dashboard/` which encode these tokens in CSS variables.
+Existing HTML shells: `dashboard/template.html`, `dashboard/report-template.html`. Presentations have no fixed shell — compose from these tokens.
+
+See the remainder of this file / upstream Apple analysis for full component vocabulary.

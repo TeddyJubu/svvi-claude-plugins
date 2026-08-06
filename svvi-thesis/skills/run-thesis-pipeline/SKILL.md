@@ -16,4 +16,5 @@ Optional argument `$ARGUMENTS` is a corpus directory override for Prompt 1 (defa
 3. Produce both:
    - `prompt 1/forward-looking-statements.md`
    - `prompt 2/thesis-synthesis.md`
-4. When finished, reply with both deliverable paths and brief Phase A / Phase B counts.
+4. If the user also wants slides/a deck, run `${CLAUDE_PLUGIN_ROOT}/skills/present/SKILL.md` (Apple design system mandatory).
+5. When finished, reply with deliverable paths and brief Phase A / Phase B counts.

@@ -9,8 +9,8 @@
   "plugins": [
     {
       "name": "svvi-thesis",
-      "description": "Thesis skills, corpus sync, and VPS-synced ops dashboard artifact",
-      "version": "1.4.2",
+      "description": "Thesis skills + corpus sync; Apple design system for dashboards, reports, presentations",
+      "version": "1.4.3",
       "author": {
         "name": "SVVI",
         "url": "https://github.com/TeddyJubu/svvi-claude-plugins"

@@ -20,7 +20,8 @@ Run the complete investment-thesis research workflow in order.
 Full Pipeline Progress:
 - [ ] Phase A — Prompt 1 (forward-looking-thesis-extraction)
 - [ ] Phase B — Prompt 2 (investment-thesis-synthesis)
-- [ ] Confirm both deliverables exist
+- [ ] Phase C — Optional Apple-styled HTML deck if user asked to present
+- [ ] Confirm deliverables exist
 ```
 
 ## Phase A — Prompt 1
@@ -45,6 +46,10 @@ Complete all Prompt 2 steps and write:
 
 `prompt 2/thesis-synthesis.md`
 
+## Phase C — Presentation (if requested)
+
+If the user asked for a presentation/slides/deck, follow `${CLAUDE_PLUGIN_ROOT}/skills/present/SKILL.md` using `prompt 2/thesis-synthesis.md`. Every visual artifact must follow `${CLAUDE_PLUGIN_ROOT}/skills/design-system/SKILL.md`.
+
 ## Done criteria
 
-Report brief completion status with paths to both deliverables. Do not modify unrelated application code.
+Report brief completion status with paths to deliverables (and the presentation HTML if created). Do not modify unrelated application code.

@@ -14,4 +14,5 @@ Optional argument `$ARGUMENTS` is an input-report path override (default: `promp
 1. Read and follow `${CLAUDE_PLUGIN_ROOT}/skills/investment-thesis-synthesis/SKILL.md` exactly.
 2. If `$ARGUMENTS` is non-empty, use that file as the Prompt 1 report instead of the default.
 3. Write the deliverable to `prompt 2/thesis-synthesis.md`.
-4. When finished, reply with the deliverable path and a short count of consensus points, signals, and thesis bullets.
+4. If the user asked to present or for slides, follow `${CLAUDE_PLUGIN_ROOT}/skills/present/SKILL.md` (design system mandatory).
+5. When finished, reply with the deliverable path and a short count of consensus points, signals, and thesis bullets.

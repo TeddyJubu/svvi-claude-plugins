@@ -23,6 +23,7 @@ Act as a senior investment analyst at an AI-focused venture capital firm. You ar
 - Only write under `prompt 2/` (overwriting the deliverable is expected).
 - Work **only** from the provided Prompt 1 report. Do not introduce outside knowledge or fabricate insights.
 - Write in clear, accessible language focused on business and market implications, not technical mechanics.
+- Any presentation/deck HTML must follow `${CLAUDE_PLUGIN_ROOT}/skills/design-system/SKILL.md`.
 - If multiple sources say essentially the same thing, group them into **one** unified point — do not list duplicates separately.
 
 ## Working-project layout
@@ -130,3 +131,13 @@ Before finishing, confirm:
 4. Deliverable path is `prompt 2/thesis-synthesis.md`.
 
 If validation fails, fix the deliverable before stopping.
+
+## Step 4 — Present thesis deck (when user-facing)
+
+If the user asked for slides, a deck, presentation, or to “show” the thesis:
+
+1. Follow `${CLAUDE_PLUGIN_ROOT}/skills/design-system/SKILL.md` and `${CLAUDE_PLUGIN_ROOT}/skills/present/SKILL.md`.
+2. Build an Apple-styled HTML presentation from Step 3 bullets (and key consensus points).
+3. Save under `presentations/` and **present the HTML as a Claude artifact**.
+
+Markdown in `prompt 2/` remains the pipeline source of truth; the artifact is the visual deck.

@@ -45,3 +45,4 @@ Pending Jobs Progress:
    - `prompt 2/thesis-synthesis.md`
 
 Do not modify application/fetch code. Do not invent quotes outside the corpus/report.
+Any HTML presentation of job outputs must follow `${CLAUDE_PLUGIN_ROOT}/skills/design-system/SKILL.md`.
