@@ -45,6 +45,8 @@ SVVI_SYNC_FORCE=1 bash "${CLAUDE_PLUGIN_ROOT}/scripts/sync-corpus.sh"
 SVVI_DASHBOARD_FORCE=1 bash "${CLAUDE_PLUGIN_ROOT}/scripts/build-dashboard.sh"
 ```
 
+Dashboard and `/report` HTML artifacts follow `plugins/svvi-thesis/references/DESIGN-apple.md` (Action Blue, parchment/tile rhythm, SF Pro).
+
 Or ask: `Show the SVVI dashboard` (`/svvi-thesis:dashboard`).
 
 ### Research briefing from a corpus slice
