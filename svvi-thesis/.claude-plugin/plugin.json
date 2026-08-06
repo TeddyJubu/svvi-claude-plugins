@@ -1,0 +1,32 @@
+{
+  "name": "svvi-thesis",
+  "version": "1.2.0",
+  "description": "SVVI thesis workflow + hosted corpus MCP. Prompt 1 extraction, Prompt 2 synthesis, scheduled jobs, and remote tools against the team SVVI server.",
+  "author": {
+    "name": "SVVI",
+    "url": "https://github.com/TeddyJubu/SVVI-fork"
+  },
+  "homepage": "https://github.com/TeddyJubu/svvi-claude-plugins/blob/main/SETUP.md",
+  "repository": "https://github.com/TeddyJubu/svvi-claude-plugins",
+  "license": "MIT",
+  "keywords": [
+    "investment-thesis",
+    "venture-capital",
+    "ai",
+    "research",
+    "prompt-1",
+    "prompt-2",
+    "mcp",
+    "cowork",
+    "claude-code"
+  ],
+  "userConfig": {
+    "mcp_token": {
+      "type": "string",
+      "title": "SVVI MCP token",
+      "description": "Ask an SVVI admin for the shared bearer token (or copy SVVI_MCP_TOKEN from the server .env). Never commit this value.",
+      "sensitive": true,
+      "required": true
+    }
+  }
+}

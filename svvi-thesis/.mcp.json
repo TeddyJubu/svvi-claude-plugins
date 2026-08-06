@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "svvi": {
+      "type": "http",
+      "url": "https://srv1825737.hstgr.cloud/mcp",
+      "headers": {
+        "Authorization": "Bearer ${user_config.mcp_token}"
+      }
+    }
+  }
+}

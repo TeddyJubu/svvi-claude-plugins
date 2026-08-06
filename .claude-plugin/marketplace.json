@@ -1,0 +1,31 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "svvi-plugins",
+  "description": "Official SVVI Claude Code / Cowork plugins (thesis skills + hosted MCP)",
+  "owner": {
+    "name": "SVVI",
+    "url": "https://github.com/TeddyJubu/svvi-claude-plugins"
+  },
+  "plugins": [
+    {
+      "name": "svvi-thesis",
+      "description": "Thesis Prompt 1/2 skills, job queue helpers, and the hosted SVVI corpus MCP",
+      "version": "1.2.0",
+      "author": {
+        "name": "SVVI",
+        "url": "https://github.com/TeddyJubu/svvi-claude-plugins"
+      },
+      "source": "./svvi-thesis",
+      "category": "productivity",
+      "homepage": "https://github.com/TeddyJubu/svvi-claude-plugins/blob/main/SETUP.md",
+      "keywords": [
+        "investment-thesis",
+        "ai",
+        "research",
+        "venture-capital",
+        "mcp",
+        "scheduler"
+      ]
+    }
+  ]
+}
