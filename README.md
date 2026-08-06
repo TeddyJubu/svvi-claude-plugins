@@ -1,10 +1,11 @@
 # svvi-claude-plugins
 
-Public Claude Code / Cowork marketplace for SVVI.
+Public SVVI plugin for **Claude Cowork (Desktop)** and Claude Code.
 
-**Setup:** [SETUP.md](./SETUP.md)
+## Cowork Desktop (easiest)
 
-```text
-/plugin marketplace add TeddyJubu/svvi-claude-plugins
-/plugin install svvi-thesis@svvi-plugins
-```
+1. Download: https://github.com/TeddyJubu/svvi-claude-plugins/releases/latest/download/svvi-thesis.zip  
+2. Cowork → **Customize** → **Plugins** → **Upload plugin**  
+3. Paste the team MCP token  
+
+Full steps: [SETUP.md](./SETUP.md)
