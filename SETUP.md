@@ -47,6 +47,12 @@ SVVI_DASHBOARD_FORCE=1 bash "${CLAUDE_PLUGIN_ROOT}/scripts/build-dashboard.sh"
 
 Or ask: `Show the SVVI dashboard` (`/svvi-thesis:dashboard`).
 
+### Research briefing from a corpus slice
+
+`/svvi-thesis:report platform=blog query=regulation limit=12`
+
+Filters: `platform`, `batch`, `query`, `since`, `until`, `limit`. Writes `reports/briefing-….md` and presents it as a Claude artifact. Uses MCP when connected; otherwise the local synced `corpus/`.
+
 **Retention:** local `corpus/*.md` unused for about **90 days** (filesystem atime) are deleted on each sync. Opening/reading a file refreshes atime. If your disk is mounted `noatime`, run `touch -a` on files you cite.
 
 Marketplace URL (public): `https://github.com/TeddyJubu/svvi-claude-plugins`  

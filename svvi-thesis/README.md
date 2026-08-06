@@ -11,4 +11,6 @@ On each session start the plugin:
 
 Local `*.md` not accessed for **90 days** (filesystem atime) are deleted automatically.
 
-Slash commands: `/svvi-thesis:dashboard`, `/svvi-thesis:prompt-1`, `/svvi-thesis:prompt-2`, `/svvi-thesis:run-thesis-pipeline`, `/svvi-thesis:process-pending-jobs`, `/svvi-thesis:sync-corpus`.
+Slash commands: `/svvi-thesis:dashboard`, `/svvi-thesis:report`, `/svvi-thesis:prompt-1`, `/svvi-thesis:prompt-2`, `/svvi-thesis:run-thesis-pipeline`, `/svvi-thesis:process-pending-jobs`, `/svvi-thesis:sync-corpus`.
+
+**Report example:** `/svvi-thesis:report platform=blog query=Taiwan limit=10` — filtered research briefing artifact.
