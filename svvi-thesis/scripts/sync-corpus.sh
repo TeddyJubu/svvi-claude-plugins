@@ -13,7 +13,7 @@ STATE_DIR="$ROOT/.svvi"
 BASE_URL="${SVVI_BASE_URL:-https://srv1825737.hstgr.cloud}"
 MANIFEST_URL="${SVVI_CORPUS_MANIFEST_URL:-$BASE_URL/corpus/manifest.json}"
 TARBALL_URL="${SVVI_CORPUS_TARBALL_URL:-$BASE_URL/corpus.tar.gz}"
-MIN_INTERVAL_SEC="${SVVI_SYNC_MIN_INTERVAL_SEC:-3600}"
+MIN_INTERVAL_SEC="${SVVI_SYNC_MIN_INTERVAL_SEC:-0}"
 PRUNE_DAYS="${SVVI_CORPUS_PRUNE_DAYS:-90}"
 FORCE="${SVVI_SYNC_FORCE:-0}"
 
@@ -37,10 +37,11 @@ printf '%s\n' "$TOKEN" >"$STATE_DIR/token"
 
 now="$(date +%s)"
 last_file="$STATE_DIR/last-sync.json"
-if [[ "$FORCE" != "1" && -f "$last_file" ]]; then
+# Optional cooldown (default 0): VPS is source of truth — always etag-check unless set.
+if [[ "$FORCE" != "1" && "$MIN_INTERVAL_SEC" =~ ^[0-9]+$ ]] && (( MIN_INTERVAL_SEC > 0 )) && [[ -f "$last_file" ]]; then
   last_ts="$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1])).get("synced_at",0))' "$last_file" 2>/dev/null || echo 0)"
   if [[ "$last_ts" =~ ^[0-9]+$ ]] && (( now - last_ts < MIN_INTERVAL_SEC )); then
-    echo "svvi-sync: skipped (synced $((now - last_ts))s ago)"
+    echo "svvi-sync: skipped (synced $((now - last_ts))s ago; set SVVI_SYNC_MIN_INTERVAL_SEC=0 to always etag-check)"
     exit 0
   fi
 fi

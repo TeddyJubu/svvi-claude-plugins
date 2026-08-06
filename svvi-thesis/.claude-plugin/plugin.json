@@ -1,6 +1,6 @@
 {
   "name": "svvi-thesis",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "SVVI thesis workflow + hosted corpus MCP. Syncs corpus markdown locally on session start; Prompt 1/2 skills; remote MCP tools.",
   "author": {
     "name": "SVVI",
