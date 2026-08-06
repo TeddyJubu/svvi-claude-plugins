@@ -140,13 +140,16 @@ else
   echo "svvi-sync: etag unchanged, skip download"
 fi
 
-# Auto-delete local markdown not accessed for PRUNE_DAYS (POSIX atime days).
+# Auto-delete local markdown not accessed for ~PRUNE_DAYS (POSIX find atime).
+# find -atime +N means strictly more than N*24h ago; use N=PRUNE_DAYS-1 so
+# "90 days unused" deletes once age reaches 90 days rather than 91+.
 pruned=0
 if [[ "$PRUNE_DAYS" =~ ^[0-9]+$ ]] && (( PRUNE_DAYS > 0 )); then
+  atime_plus=$((PRUNE_DAYS - 1))
   while IFS= read -r -d '' stale; do
     rm -f "$stale"
     pruned=$((pruned + 1))
-  done < <(find "$CORPUS_DIR" -maxdepth 1 -type f -name '*.md' -atime "+${PRUNE_DAYS}" -print0 2>/dev/null || true)
+  done < <(find "$CORPUS_DIR" -maxdepth 1 -type f -name '*.md' -atime "+${atime_plus}" -print0 2>/dev/null || true)
 fi
 
 remote_etag="$etag"

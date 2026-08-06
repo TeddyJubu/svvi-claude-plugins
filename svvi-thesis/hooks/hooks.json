@@ -7,7 +7,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "SVVI_MCP_TOKEN='${user_config.mcp_token}' bash \"${CLAUDE_PLUGIN_ROOT}/scripts/sync-corpus.sh\"",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/scripts/sync-corpus.sh\"",
             "timeout": 120
           },
           {

@@ -36,7 +36,7 @@ Install the plugin if you want **local `.md` files** (offline + open/cite) that 
 1. Download:  
    **https://github.com/TeddyJubu/svvi-claude-plugins/releases/latest/download/svvi-thesis.zip**
 2. **Customize** → **Plugins** → **Upload plugin** → choose the zip.
-3. Paste the **same MCP token** when prompted (required for sync).
+3. Paste the **same MCP token** when prompted for MCP, and once write it to the plugin `.svvi/token` file (ask Claude to run **sync-corpus** — it saves the token without putting it in a shell string).
 4. Start a **new** session — SessionStart etag-checks the VPS and downloads only if the corpus changed. After any **fetch** (MCP `fetch_run` / schedule), Claude should **force-sync** so local matches the VPS (source of truth).
 5. Manual refresh:
 
@@ -44,7 +44,7 @@ Install the plugin if you want **local `.md` files** (offline + open/cite) that 
 SVVI_SYNC_FORCE=1 bash "${CLAUDE_PLUGIN_ROOT}/scripts/sync-corpus.sh"
 ```
 
-**Retention:** local `corpus/*.md` with filesystem **access time older than 90 days** are deleted on each sync. Opening/reading a file refreshes atime. If your disk is mounted `noatime`, run `touch -a` on files you cite.
+**Retention:** local `corpus/*.md` unused for about **90 days** (filesystem atime) are deleted on each sync. Opening/reading a file refreshes atime. If your disk is mounted `noatime`, run `touch -a` on files you cite.
 
 Marketplace URL (public): `https://github.com/TeddyJubu/svvi-claude-plugins`  
 Do **not** use `TeddyJubu/SVVI-fork` (private).
